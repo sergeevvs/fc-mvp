@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="team"
+            type="com.sergeevvs.footballcards.data.Team" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".CardFragment">
+
+
+        <include
+            android:id="@+id/include_card"
+            layout="@layout/team_card"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_margin="8dp" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp"
+            app:cardBackgroundColor="#1A6200EE">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/team_website"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{team.website}"
+                    tools:text="Hello world it is Barcelona FC" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+</layout>
