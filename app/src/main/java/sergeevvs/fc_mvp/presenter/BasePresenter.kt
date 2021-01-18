@@ -1,8 +1,10 @@
 package sergeevvs.fc_mvp.presenter
 
-import sergeevvs.fc_mvp.interfaces.MvpContract
+import sergeevvs.fc_mvp.model.MvpModel
+import sergeevvs.fc_mvp.view.MvpView
 
-abstract class BasePresenter<V : MvpContract.IView> : MvpContract.IPresenter<V> {
+abstract class BasePresenter<V : MvpView, M : MvpModel>(val model: M) :
+        MvpPresenter<V> {
 
     var view: V? = null
 

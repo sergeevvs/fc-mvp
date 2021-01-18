@@ -10,11 +10,10 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import sergeevvs.fc_mvp.R
 import sergeevvs.fc_mvp.databinding.FragmentCardBinding
-import sergeevvs.fc_mvp.interfaces.ICardView
 import sergeevvs.fc_mvp.model.CardModel
 import sergeevvs.fc_mvp.presenter.CardPresenter
 
-class CardFragment : Fragment(), ICardView {
+class CardFragment : Fragment(), MvpView {
 
     lateinit var binding: FragmentCardBinding
 

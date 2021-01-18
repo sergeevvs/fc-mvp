@@ -9,11 +9,10 @@ import sergeevvs.fc_mvp.RecyclerAdapter
 import sergeevvs.fc_mvp.data.ID
 import sergeevvs.fc_mvp.data.Team
 import sergeevvs.fc_mvp.data.TeamsList
-import sergeevvs.fc_mvp.interfaces.IListModel
-import sergeevvs.fc_mvp.interfaces.IListPresenter
-import sergeevvs.fc_mvp.interfaces.IListView
+import sergeevvs.fc_mvp.model.ListModel
+import sergeevvs.fc_mvp.view.ListFragment
 
-class ListPresenter(private val model: IListModel) : BasePresenter<IListView>(), IListPresenter {
+class ListPresenter(model: ListModel) : BasePresenter<ListFragment, ListModel>(model) {
 
     private val teams = mutableListOf<Team>()
 
@@ -34,7 +33,7 @@ class ListPresenter(private val model: IListModel) : BasePresenter<IListView>(),
         })
     }
 
-    override fun onBindTeamAtPosition(holder: RecyclerAdapter.TeamCardHolder, position: Int) {
+    fun onBindTeamAtPosition(holder: RecyclerAdapter.TeamCardHolder, position: Int) {
         val currentTeam = teams[position]
         holder.bindTeam(currentTeam) {
             val bundle = Bundle()
@@ -46,7 +45,7 @@ class ListPresenter(private val model: IListModel) : BasePresenter<IListView>(),
         }
     }
 
-    override fun getTeamCount(): Int {
+    fun getTeamCount(): Int {
         return teams.size
     }
 }

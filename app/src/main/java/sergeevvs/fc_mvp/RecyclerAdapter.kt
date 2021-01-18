@@ -8,10 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import sergeevvs.fc_mvp.data.Team
 import sergeevvs.fc_mvp.databinding.TeamCardBinding
-import sergeevvs.fc_mvp.interfaces.IListPresenter
+import sergeevvs.fc_mvp.presenter.ListPresenter
 
-class RecyclerAdapter(private val presenter: IListPresenter) :
-    RecyclerView.Adapter<RecyclerAdapter.TeamCardHolder>() {
+class RecyclerAdapter(private val presenter: ListPresenter) :
+        RecyclerView.Adapter<RecyclerAdapter.TeamCardHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeamCardHolder {
         return TeamCardHolder(
@@ -31,16 +31,16 @@ class RecyclerAdapter(private val presenter: IListPresenter) :
     override fun getItemCount() = presenter.getTeamCount()
 
     class TeamCardHolder(private val binding: TeamCardBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+            RecyclerView.ViewHolder(binding.root) {
 
-        fun bindTeam(team: Team, listener: () -> Unit) {
+        fun bindTeam(team: Team, onCardClickListener: () -> Unit) {
             binding.team = team
-            binding.root.setOnClickListener { listener() }
+            binding.root.setOnClickListener { onCardClickListener() }
             binding.executePendingBindings()
 
-            Glide.with(binding.root)
-                    .load(team.crestUrl)
-                    .into(binding.cardImage)
+//            Glide.with(binding.root)
+//                    .load(team.crestUrl)
+//                    .into(binding.cardImage)
         }
     }
 }

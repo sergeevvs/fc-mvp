@@ -12,11 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import sergeevvs.fc_mvp.R
 import sergeevvs.fc_mvp.RecyclerAdapter
 import sergeevvs.fc_mvp.databinding.FragmentListBinding
-import sergeevvs.fc_mvp.interfaces.IListView
 import sergeevvs.fc_mvp.model.ListModel
 import sergeevvs.fc_mvp.presenter.ListPresenter
 
-class ListFragment : Fragment(), IListView {
+class ListFragment : Fragment(), MvpView {
 
     lateinit var binding: FragmentListBinding
 
@@ -51,7 +50,7 @@ class ListFragment : Fragment(), IListView {
         presenter.detachView()
     }
 
-    override fun updateList() {
+    fun updateList() {
         binding.recyclerView.adapter?.notifyDataSetChanged()
     }
 
