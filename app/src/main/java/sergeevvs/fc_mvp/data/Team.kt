@@ -1,7 +1,9 @@
-package com.sergeevvs.footballcards.data
+package sergeevvs.fc_mvp.data
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import sergeevvs.fc_mvp.data.Area
+import sergeevvs.fc_mvp.data.Player
 
 
 const val ID = "id"

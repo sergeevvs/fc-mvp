@@ -1,4 +1,4 @@
-package sergeevvs.fc_mvp.views
+package sergeevvs.fc_mvp.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,11 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import sergeevvs.fc_mvp.R
 import sergeevvs.fc_mvp.databinding.FragmentCardBinding
 import sergeevvs.fc_mvp.interfaces.ICardView
+import sergeevvs.fc_mvp.model.CardModel
+import sergeevvs.fc_mvp.presenter.CardPresenter
 
 class CardFragment : Fragment(), ICardView {
+
+    lateinit var binding: FragmentCardBinding
+
+    private val presenter = CardPresenter(CardModel())
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -18,7 +26,7 @@ class CardFragment : Fragment(), ICardView {
         savedInstanceState: Bundle?
     ): View {
 
-        val binding: FragmentCardBinding = DataBindingUtil.inflate(
+        binding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_card,
             container,
@@ -26,5 +34,9 @@ class CardFragment : Fragment(), ICardView {
         )
 
         return binding.root
+    }
+
+    override fun getNavController(): NavController {
+        return findNavController()
     }
 }

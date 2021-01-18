@@ -5,7 +5,7 @@
 
         <variable
             name="team"
-            type="com.sergeevvs.footballcards.data.Team" />
+            type="sergeevvs.fc_mvp.data.Team" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

@@ -7,7 +7,7 @@
 
         <variable
             name="team"
-            type="com.sergeevvs.footballcards.data.Team" />
+            type="sergeevvs.fc_mvp.data.Team" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -24,7 +24,6 @@
                 android:id="@+id/card_image"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_marginHorizontal="8dp"
                 android:importantForAccessibility="no"
                 android:scaleType="centerCrop"
                 app:layout_constraintStart_toStartOf="parent"

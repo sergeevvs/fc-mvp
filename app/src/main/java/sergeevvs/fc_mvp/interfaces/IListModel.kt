@@ -1,7 +1,8 @@
 package sergeevvs.fc_mvp.interfaces
 
-import com.sergeevvs.footballcards.data.Team
+import sergeevvs.fc_mvp.data.TeamsList
+import retrofit2.Call
 
 interface IListModel {
-    fun getTeams(): List<Team>
+    fun getTeams(): Call<TeamsList>
 }

@@ -1,4 +1,4 @@
-package com.sergeevvs.footballcards.data
+package sergeevvs.fc_mvp.data
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
