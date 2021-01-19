@@ -12,8 +12,8 @@
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_margin="8dp"
+        android:layout_height="80dp"
+        android:layout_margin="@dimen/card_element_margin"
         app:cardBackgroundColor="#1A6200EE">
 
         <LinearLayout
@@ -22,47 +22,36 @@
 
             <ImageView
                 android:id="@+id/card_image"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:importantForAccessibility="no"
                 android:scaleType="centerCrop"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_launcher_foreground" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                app:layout_constraintStart_toEndOf="@id/card_image"
-                app:layout_constraintTop_toTopOf="parent">
+                android:orientation="vertical">
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/card_name"
+                    style="@style/Widget.FC.TextViewName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:fontFamily="@font/roboto"
                     android:gravity="center_vertical"
                     android:singleLine="true"
                     android:text="@{team.name}"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textSize="24sp"
-                    tools:text="Barcelona" />
+                    tools:text="Barcelona is best team on the planet" />
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/card_country"
+                    style="@style/Widget.FC.TextViewDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="1dp"
                     android:layout_weight="1"
-                    android:fontFamily="@font/roboto"
                     android:singleLine="true"
                     android:text="@{team.area.name}"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="@id/card_name"
-                    app:layout_constraintTop_toBottomOf="@id/card_name"
                     tools:text="Spain" />
             </LinearLayout>
         </LinearLayout>

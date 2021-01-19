@@ -1,10 +1,8 @@
 package sergeevvs.fc_mvp.presenter
 
-import sergeevvs.fc_mvp.model.MvpModel
 import sergeevvs.fc_mvp.view.MvpView
 
-abstract class BasePresenter<V : MvpView, M : MvpModel>(val model: M) :
-        MvpPresenter<V> {
+abstract class BasePresenter<V : MvpView> : MvpPresenter<V> {
 
     var view: V? = null
 

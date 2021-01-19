@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -8,9 +10,7 @@
             type="sergeevvs.fc_mvp.data.Team" />
     </data>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -21,27 +21,119 @@
             android:id="@+id/include_card"
             layout="@layout/team_card"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_margin="8dp" />
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/card_element_margin"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="8dp"
-            app:cardBackgroundColor="#1A6200EE">
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/card_element_margin"
+            app:cardBackgroundColor="#1A6200EE"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/include_card">
 
-            <LinearLayout
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/card_element_margin"
+                android:scrollbars="vertical">
 
-                <TextView
-                    android:id="@+id/team_website"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@{team.website}"
-                    tools:text="Hello world it is Barcelona FC" />
-            </LinearLayout>
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/name"
+                        style="@style/Widget.FC.TextViewName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@{team.name}"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Barcelona is best team on the planet in the world really" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/location"
+                        style="@style/Widget.FC.TextViewDescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/card_element_margin"
+                        android:text="@string/location"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/name" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/team_location"
+                        style="@style/Widget.FC.TextViewDescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/card_element_margin"
+                        android:text="@{team.area.name}"
+                        app:layout_constraintStart_toEndOf="@id/location"
+                        app:layout_constraintTop_toTopOf="@id/location"
+                        tools:text="Spain" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/website"
+                        style="@style/Widget.FC.TextViewDescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/card_element_margin"
+                        android:text="@string/website"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/location" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/team_website"
+                        style="@style/Widget.FC.TextViewDescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/card_element_margin"
+                        android:text="@{team.website}"
+                        app:layout_constraintStart_toEndOf="@id/website"
+                        app:layout_constraintTop_toTopOf="@id/website"
+                        tools:text="www.google.com" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/email"
+                        style="@style/Widget.FC.TextViewDescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/card_element_margin"
+                        android:text="@string/email"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/website" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/team_email"
+                        style="@style/Widget.FC.TextViewDescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/card_element_margin"
+                        android:text="@{team.email}"
+                        app:layout_constraintStart_toEndOf="@id/email"
+                        app:layout_constraintTop_toTopOf="@id/email"
+                        tools:text="email@gmail.com" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/players_button"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/card_element_margin"
+                        android:text="@string/players"
+                        app:cornerRadius="16dp"
+                        app:icon="@drawable/ic_baseline_people_outline_24"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/email" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </ScrollView>
+
         </com.google.android.material.card.MaterialCardView>
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

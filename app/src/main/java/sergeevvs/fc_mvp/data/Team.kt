@@ -8,6 +8,8 @@ import sergeevvs.fc_mvp.data.Player
 
 const val ID = "id"
 
+fun getMockTeam() = Team(id=0, area=Area(id=0, name="Mocked data"), name="Mocked data", crestUrl="https://crests.football-data.org/58.svg", website="Mocked data", email="Mocked data", squad= listOf(Player(id=0, name="Mocked data", position="Mocked data")))
+
 data class Team(
 
     @SerializedName("id")

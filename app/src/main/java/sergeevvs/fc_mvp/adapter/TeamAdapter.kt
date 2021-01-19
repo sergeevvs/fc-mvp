@@ -1,17 +1,17 @@
-package sergeevvs.fc_mvp
+package sergeevvs.fc_mvp.adapter
 
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import sergeevvs.fc_mvp.R
 import sergeevvs.fc_mvp.data.Team
 import sergeevvs.fc_mvp.databinding.TeamCardBinding
-import sergeevvs.fc_mvp.presenter.ListPresenter
+import sergeevvs.fc_mvp.presenter.TeamsListPresenter
 
-class RecyclerAdapter(private val presenter: ListPresenter) :
-        RecyclerView.Adapter<RecyclerAdapter.TeamCardHolder>() {
+class TeamAdapter(private val presenter: TeamsListPresenter) :
+        RecyclerView.Adapter<TeamAdapter.TeamCardHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeamCardHolder {
         return TeamCardHolder(
@@ -33,14 +33,14 @@ class RecyclerAdapter(private val presenter: ListPresenter) :
     class TeamCardHolder(private val binding: TeamCardBinding) :
             RecyclerView.ViewHolder(binding.root) {
 
-        fun bindTeam(team: Team, onCardClickListener: () -> Unit) {
+        fun bindTeam(team: Team, listener: () -> Unit) {
             binding.team = team
-            binding.root.setOnClickListener { onCardClickListener() }
+            binding.root.setOnClickListener { listener() }
             binding.executePendingBindings()
 
-//            Glide.with(binding.root)
-//                    .load(team.crestUrl)
-//                    .into(binding.cardImage)
+            /*Glide.with(binding.root)
+                    .load(team.crestUrl)
+                    .into(binding.cardImage)*/
         }
     }
 }

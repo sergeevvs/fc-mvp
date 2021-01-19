@@ -1,27 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/nav_graph"
-        app:startDestination="@id/listFragment">
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/listFragment">
 
     <fragment
-            android:id="@+id/listFragment"
-            android:name="sergeevvs.fc_mvp.view.ListFragment"
-            android:label="fragment_list"
-            tools:layout="@layout/fragment_list">
+        android:id="@+id/listFragment"
+        android:name="sergeevvs.fc_mvp.view.TeamsListFragment"
+        android:label="fragment_list"
+        tools:layout="@layout/fragment_list">
         <action
-                android:id="@+id/action_listFragment_to_cardFragment"
-                app:destination="@id/cardFragment"/>
+            android:id="@+id/action_listFragment_to_cardFragment"
+            app:destination="@id/cardFragment" />
     </fragment>
     <fragment
-            android:id="@+id/cardFragment"
-            android:name="sergeevvs.fc_mvp.view.CardFragment"
-            android:label="fragment_card"
-            tools:layout="@layout/fragment_card">
+        android:id="@+id/cardFragment"
+        android:name="sergeevvs.fc_mvp.view.TeamCardFragment"
+        android:label="fragment_card"
+        tools:layout="@layout/fragment_card">
         <action
-                android:id="@+id/action_cardFragment_to_listFragment"
-                app:destination="@id/listFragment"/>
+            android:id="@+id/action_cardFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+        <action
+            android:id="@+id/action_cardFragment_to_squadListFragment"
+            app:destination="@id/squadListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/squadListFragment"
+        android:name="sergeevvs.fc_mvp.view.SquadListFragment"
+        android:label="SquadListFragment"
+        tools:layout="@layout/fragment_squad">
+        <action
+            android:id="@+id/action_squadListFragment_to_cardFragment"
+            app:destination="@id/cardFragment" />
     </fragment>
 </navigation>

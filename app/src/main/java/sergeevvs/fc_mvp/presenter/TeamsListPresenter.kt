@@ -5,14 +5,14 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import sergeevvs.fc_mvp.R
-import sergeevvs.fc_mvp.RecyclerAdapter
+import sergeevvs.fc_mvp.adapter.TeamAdapter
 import sergeevvs.fc_mvp.data.ID
 import sergeevvs.fc_mvp.data.Team
 import sergeevvs.fc_mvp.data.TeamsList
-import sergeevvs.fc_mvp.model.ListModel
-import sergeevvs.fc_mvp.view.ListFragment
+import sergeevvs.fc_mvp.model.TeamsListModel
+import sergeevvs.fc_mvp.view.TeamsListFragment
 
-class ListPresenter(model: ListModel) : BasePresenter<ListFragment, ListModel>(model) {
+class TeamsListPresenter(private val model: TeamsListModel) : BasePresenter<TeamsListFragment>() {
 
     private val teams = mutableListOf<Team>()
 
@@ -33,7 +33,7 @@ class ListPresenter(model: ListModel) : BasePresenter<ListFragment, ListModel>(m
         })
     }
 
-    fun onBindTeamAtPosition(holder: RecyclerAdapter.TeamCardHolder, position: Int) {
+    fun onBindTeamAtPosition(holder: TeamAdapter.TeamCardHolder, position: Int) {
         val currentTeam = teams[position]
         holder.bindTeam(currentTeam) {
             val bundle = Bundle()

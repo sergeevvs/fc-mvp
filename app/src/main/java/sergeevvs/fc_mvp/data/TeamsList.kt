@@ -2,7 +2,8 @@ package sergeevvs.fc_mvp.data
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import sergeevvs.fc_mvp.data.Team
+
+fun getMockTeamsList() = TeamsList(listOf(getMockTeam(), getMockTeam(), getMockTeam()))
 
 data class TeamsList(
 

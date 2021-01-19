@@ -10,18 +10,15 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import sergeevvs.fc_mvp.R
-import sergeevvs.fc_mvp.RecyclerAdapter
+import sergeevvs.fc_mvp.adapter.TeamAdapter
 import sergeevvs.fc_mvp.databinding.FragmentListBinding
-import sergeevvs.fc_mvp.model.ListModel
-import sergeevvs.fc_mvp.presenter.ListPresenter
+import sergeevvs.fc_mvp.model.TeamsListModel
+import sergeevvs.fc_mvp.presenter.TeamsListPresenter
 
-class ListFragment : Fragment(), MvpView {
+class TeamsListFragment : Fragment(), MvpView {
 
-    lateinit var binding: FragmentListBinding
-
-    private val presenter = ListPresenter(ListModel())
-    private val adapter = RecyclerAdapter(presenter)
-    private val llm = LinearLayoutManager(context)
+    private lateinit var binding: FragmentListBinding
+    private val presenter = TeamsListPresenter(TeamsListModel())
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,8 +33,8 @@ class ListFragment : Fragment(), MvpView {
             false
         )
 
-        binding.recyclerView.layoutManager = llm
-        binding.recyclerView.adapter = adapter
+        binding.recyclerView.layoutManager = LinearLayoutManager(context)
+        binding.recyclerView.adapter = TeamAdapter(presenter)
 
         presenter.attachView(this)
         presenter.viewIsReady()
@@ -50,11 +47,11 @@ class ListFragment : Fragment(), MvpView {
         presenter.detachView()
     }
 
-    fun updateList() {
-        binding.recyclerView.adapter?.notifyDataSetChanged()
-    }
-
     override fun getNavController(): NavController {
         return findNavController()
+    }
+
+    fun updateList() {
+        binding.recyclerView.adapter?.notifyDataSetChanged()
     }
 }
