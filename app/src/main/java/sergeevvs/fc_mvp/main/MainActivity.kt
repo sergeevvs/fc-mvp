@@ -1,4 +1,4 @@
-package sergeevvs.fc_mvp.view
+package sergeevvs.fc_mvp.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

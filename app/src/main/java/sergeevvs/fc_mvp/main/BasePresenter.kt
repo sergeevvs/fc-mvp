@@ -1,6 +1,6 @@
-package sergeevvs.fc_mvp.presenter
+package sergeevvs.fc_mvp.main
 
-import sergeevvs.fc_mvp.view.MvpView
+import android.os.Bundle
 
 abstract class BasePresenter<V : MvpView> : MvpPresenter<V> {
 

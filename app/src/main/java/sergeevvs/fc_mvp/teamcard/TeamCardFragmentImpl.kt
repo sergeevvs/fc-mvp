@@ -1,4 +1,4 @@
-package sergeevvs.fc_mvp.view
+package sergeevvs.fc_mvp.teamcard
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,18 +6,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import sergeevvs.fc_mvp.R
+import sergeevvs.fc_mvp.data.TEAM
 import sergeevvs.fc_mvp.data.Team
 import sergeevvs.fc_mvp.databinding.FragmentCardBinding
-import sergeevvs.fc_mvp.model.TeamCardModel
-import sergeevvs.fc_mvp.presenter.TeamCardPresenter
+import sergeevvs.fc_mvp.repository.MainRepositoryImpl
 
-class TeamCardFragment : Fragment(), MvpView {
+class TeamCardFragmentImpl : Fragment(), TeamCardFragment {
 
     private lateinit var binding: FragmentCardBinding
-    private val presenter = TeamCardPresenter(TeamCardModel())
+    private val presenter: TeamCardPresenter = TeamCardPresenterImpl(MainRepositoryImpl())
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        savedInstanceState?.getSerializable(TEAM)?.let { presenter.attachTeam(it as Team) }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,21 +42,26 @@ class TeamCardFragment : Fragment(), MvpView {
         return binding.root
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putSerializable(TEAM, presenter.getTeam())
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         presenter.detachView()
     }
 
-    override fun getNavController(): NavController {
-        return findNavController()
-    }
-
-    fun showTeam(team: Team?) {
+    override fun showTeam(team: Team) {
         binding.includeCard.team = team
         binding.team = team
-    }
-
-    fun setOnPlayersButtonClickListener(listener: () -> Unit) {
-        binding.playersButton.setOnClickListener { listener() }
+        binding.playersButton.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putSerializable(TEAM, team)
+            findNavController().navigate(
+                R.id.action_cardFragment_to_squadListFragment,
+                bundle
+            )
+        }
     }
 }

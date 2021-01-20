@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import sergeevvs.fc_mvp.R
 import sergeevvs.fc_mvp.data.Player
 import sergeevvs.fc_mvp.databinding.PlayerCardBinding
-import sergeevvs.fc_mvp.presenter.SquadListPresenter
+import sergeevvs.fc_mvp.squad.SquadListPresenter
 
 class SquadAdapter(private val presenter: SquadListPresenter) :
     RecyclerView.Adapter<SquadAdapter.PlayerCardHolder>() {
@@ -32,13 +32,9 @@ class SquadAdapter(private val presenter: SquadListPresenter) :
     class PlayerCardHolder(private val binding: PlayerCardBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bindTeam(player: Player) {
+        fun bindPlayer(player: Player) {
             binding.player = player
             binding.executePendingBindings()
-
-            /*Glide.with(binding.root)
-                    .load(team.crestUrl)
-                    .into(binding.cardImage)*/
         }
     }
 }

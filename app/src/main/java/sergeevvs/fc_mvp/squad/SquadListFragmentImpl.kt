@@ -1,4 +1,4 @@
-package sergeevvs.fc_mvp.view
+package sergeevvs.fc_mvp.squad
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,13 +11,19 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import sergeevvs.fc_mvp.R
 import sergeevvs.fc_mvp.adapter.SquadAdapter
+import sergeevvs.fc_mvp.data.TEAM
+import sergeevvs.fc_mvp.data.Team
 import sergeevvs.fc_mvp.databinding.FragmentSquadBinding
-import sergeevvs.fc_mvp.presenter.SquadListPresenter
 
-class SquadListFragment : Fragment(), MvpView {
+class SquadListFragmentImpl : Fragment(), SquadListFragment {
 
     private lateinit var binding: FragmentSquadBinding
-    private val presenter = SquadListPresenter()
+    private val presenter: SquadListPresenter = SquadListPresenterImpl()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        savedInstanceState?.getSerializable(TEAM)?.let { presenter.attachTeam(it as Team) }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,16 +47,17 @@ class SquadListFragment : Fragment(), MvpView {
         return binding.root
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putSerializable(TEAM, presenter.getTeam())
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         presenter.detachView()
     }
 
-    override fun getNavController(): NavController {
-        return findNavController()
-    }
-
-    fun updateList() {
+    override fun updateList() {
         binding.recyclerView.adapter?.notifyDataSetChanged()
     }
 }

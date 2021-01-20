@@ -1,4 +1,4 @@
-package sergeevvs.fc_mvp.view
+package sergeevvs.fc_mvp.teamslist
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,15 +10,22 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import sergeevvs.fc_mvp.R
-import sergeevvs.fc_mvp.adapter.TeamAdapter
+import sergeevvs.fc_mvp.adapter.TeamsListAdapter
+import sergeevvs.fc_mvp.data.TEAMS_LIST
+import sergeevvs.fc_mvp.data.TeamsList
 import sergeevvs.fc_mvp.databinding.FragmentListBinding
-import sergeevvs.fc_mvp.model.TeamsListModel
-import sergeevvs.fc_mvp.presenter.TeamsListPresenter
+import sergeevvs.fc_mvp.repository.MainRepositoryImpl
 
-class TeamsListFragment : Fragment(), MvpView {
+class TeamsListFragmentImpl : Fragment(), TeamsListFragment {
 
     private lateinit var binding: FragmentListBinding
-    private val presenter = TeamsListPresenter(TeamsListModel())
+    private val presenter: TeamsListPresenter = TeamsListPresenterImpl(MainRepositoryImpl())
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        savedInstanceState?.getSerializable(TEAMS_LIST)
+                ?.let { presenter.attachTeamsList(it as TeamsList) }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,12 +41,17 @@ class TeamsListFragment : Fragment(), MvpView {
         )
 
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
-        binding.recyclerView.adapter = TeamAdapter(presenter)
+        binding.recyclerView.adapter = TeamsListAdapter(presenter)
 
         presenter.attachView(this)
         presenter.viewIsReady()
 
         return binding.root
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putSerializable(TEAMS_LIST, presenter.getTeamsList())
     }
 
     override fun onDestroyView() {
@@ -51,7 +63,7 @@ class TeamsListFragment : Fragment(), MvpView {
         return findNavController()
     }
 
-    fun updateList() {
+    override fun updateList() {
         binding.recyclerView.adapter?.notifyDataSetChanged()
     }
 }
