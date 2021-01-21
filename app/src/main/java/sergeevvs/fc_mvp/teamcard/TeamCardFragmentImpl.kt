@@ -1,5 +1,6 @@
 package sergeevvs.fc_mvp.teamcard
 
+import android.graphics.drawable.PictureDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.RequestBuilder
 import sergeevvs.fc_mvp.R
 import sergeevvs.fc_mvp.data.TEAM
 import sergeevvs.fc_mvp.data.Team
@@ -52,7 +54,7 @@ class TeamCardFragmentImpl : Fragment(), TeamCardFragment {
         presenter.detachView()
     }
 
-    override fun showTeam(team: Team) {
+    override fun showTeam(team: Team, requestBuilder: RequestBuilder<PictureDrawable>) {
         binding.includeCard.team = team
         binding.team = team
         binding.playersButton.setOnClickListener {
@@ -63,5 +65,6 @@ class TeamCardFragmentImpl : Fragment(), TeamCardFragment {
                 bundle
             )
         }
+        requestBuilder.load(team.crestUrl).into(binding.includeCard.cardImage)
     }
 }

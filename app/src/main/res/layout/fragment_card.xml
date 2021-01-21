@@ -21,7 +21,7 @@
             android:id="@+id/include_card"
             layout="@layout/team_card"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/card_height"
             android:layout_margin="@dimen/card_element_margin"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -117,13 +117,13 @@
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/players_button"
-                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/card_element_margin"
                         android:text="@string/players"
-                        app:cornerRadius="16dp"
+                        android:textColor="@color/black"
                         app:icon="@drawable/ic_baseline_people_outline_24"
+                        app:iconTint="@color/black"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/email" />

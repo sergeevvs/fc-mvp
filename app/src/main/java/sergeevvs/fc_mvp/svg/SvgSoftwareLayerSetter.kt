@@ -8,7 +8,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.ImageViewTarget
 import com.bumptech.glide.request.target.Target
 
-class SvgSoftwareLayerSetter : RequestListener<PictureDrawable> {
+object SvgSoftwareLayerSetter : RequestListener<PictureDrawable> {
 
     override fun onLoadFailed(
         e: GlideException?,
