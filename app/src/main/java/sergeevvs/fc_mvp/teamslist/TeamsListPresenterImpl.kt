@@ -13,7 +13,7 @@ import sergeevvs.fc_mvp.repository.MainRepository
 class TeamsListPresenterImpl(private val model: MainRepository) :
     BasePresenter<TeamsListFragment>(), TeamsListPresenter {
 
-    private lateinit var teams: TeamsList
+    private var teams = getMockTeamsList()
     private lateinit var navController: NavController
 
     override fun getTeamsList() = teams
@@ -23,14 +23,14 @@ class TeamsListPresenterImpl(private val model: MainRepository) :
     }
 
     override fun viewIsReady() {
-        if (!this::teams.isInitialized) loadTeams()
+        if (teams.list.isEmpty()) loadTeams()
         view?.getNavController()?.let { navController = it }
     }
 
     private fun loadTeams() {
         model.getTeams().enqueue(object : Callback<TeamsList> {
             override fun onResponse(call: Call<TeamsList>, response: Response<TeamsList>) {
-                teams = response.body() ?: getMockTeamsList()
+                response.body()?.let { teams = it }
                 view?.updateList()
             }
 
@@ -45,6 +45,6 @@ class TeamsListPresenterImpl(private val model: MainRepository) :
     }
 
     override fun getTeamCount(): Int {
-        return if (this::teams.isInitialized) teams.list.size else 0
+        return teams.list.size
     }
 }

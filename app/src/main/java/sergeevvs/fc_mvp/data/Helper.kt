@@ -7,12 +7,12 @@ const val TEAMS_LIST = "teams_list"
 
 fun getMockTeam() = Team(
     id = 0,
-    area = Area(id = 0, name = "Mocked data"),
-    name = "Mocked data",
-    crestUrl = "https://crests.football-data.org/58.svg",
-    website = "Mocked data",
-    email = "Mocked data",
-    squad = mutableListOf(Player(id = 0, name = "Mocked data", position = "Mocked data"))
+    area = Area(id = 0, name = ""),
+    name = "",
+    crestUrl = "",
+    website = "",
+    email = "",
+    squad = mutableListOf()
 )
 
-fun getMockTeamsList() = TeamsList(mutableListOf(getMockTeam(), getMockTeam(), getMockTeam()))
+fun getMockTeamsList() = TeamsList(mutableListOf())

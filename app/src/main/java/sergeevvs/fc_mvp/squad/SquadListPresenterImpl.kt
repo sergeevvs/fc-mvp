@@ -3,11 +3,12 @@ package sergeevvs.fc_mvp.squad
 import sergeevvs.fc_mvp.adapter.SquadAdapter
 import sergeevvs.fc_mvp.data.TEAM
 import sergeevvs.fc_mvp.data.Team
+import sergeevvs.fc_mvp.data.getMockTeam
 import sergeevvs.fc_mvp.main.BasePresenter
 
 class SquadListPresenterImpl : BasePresenter<SquadListFragment>(), SquadListPresenter {
 
-    private lateinit var team: Team
+    private var team = getMockTeam()
 
     override fun getTeam() = team
 
@@ -16,11 +17,11 @@ class SquadListPresenterImpl : BasePresenter<SquadListFragment>(), SquadListPres
     }
 
     override fun viewIsReady() {
-        if (!this::team.isInitialized) loadPlayers()
+        if (team.id == 0) loadPlayers()
     }
 
     private fun loadPlayers() {
-        team = view?.getArguments()?.getSerializable(TEAM) as Team
+        view?.getArguments()?.getSerializable(TEAM)?.let { team = it as Team }
         view?.updateList()
     }
 
@@ -29,6 +30,6 @@ class SquadListPresenterImpl : BasePresenter<SquadListFragment>(), SquadListPres
     }
 
     override fun getPlayerCount(): Int {
-        return if (this::team.isInitialized) team.squad.size else 0
+        return team.squad.size
     }
 }

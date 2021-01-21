@@ -12,7 +12,7 @@ import sergeevvs.fc_mvp.repository.MainRepository
 class TeamCardPresenterImpl(private val model: MainRepository) : BasePresenter<TeamCardFragment>(),
     TeamCardPresenter {
 
-    private lateinit var team: Team
+    private var team = getMockTeam()
 
     override fun getTeam() = team
 
@@ -21,7 +21,7 @@ class TeamCardPresenterImpl(private val model: MainRepository) : BasePresenter<T
     }
 
     override fun viewIsReady() {
-        if (!this::team.isInitialized) loadTeam()
+        if (team.id == 0) loadTeam()
         else view?.showTeam(team)
     }
 
@@ -29,7 +29,7 @@ class TeamCardPresenterImpl(private val model: MainRepository) : BasePresenter<T
         view?.getArguments()?.getInt(ID)?.let {
             model.getTeam(it).enqueue(object : Callback<Team> {
                 override fun onResponse(call: Call<Team>, response: Response<Team>) {
-                    team = response.body() ?: getMockTeam()
+                    response.body()?.let { it1 -> team = it1 }
                     view?.showTeam(team)
                 }
 
