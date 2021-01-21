@@ -1,16 +1,19 @@
 package sergeevvs.fc_mvp.adapter
 
 
+import android.graphics.drawable.PictureDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import sergeevvs.fc_mvp.R
 import sergeevvs.fc_mvp.data.ID
 import sergeevvs.fc_mvp.data.Team
 import sergeevvs.fc_mvp.databinding.TeamCardBinding
+import sergeevvs.fc_mvp.svg.SvgSoftwareLayerSetter
 import sergeevvs.fc_mvp.teamslist.TeamsListPresenter
 
 class TeamsListAdapter(private val presenter: TeamsListPresenter) :
@@ -48,9 +51,11 @@ class TeamsListAdapter(private val presenter: TeamsListPresenter) :
             }
             binding.executePendingBindings()
 
-            /*Glide.with(binding.root)
+            Glide.with(binding.root.context)
+                    .`as`(PictureDrawable::class.java)
                     .load(team.crestUrl)
-                    .into(binding.cardImage)*/
+                    .listener(SvgSoftwareLayerSetter())
+                    .into(binding.cardImage)
         }
     }
 }
