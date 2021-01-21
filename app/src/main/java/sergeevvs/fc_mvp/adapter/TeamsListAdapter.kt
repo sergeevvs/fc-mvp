@@ -1,12 +1,14 @@
 package sergeevvs.fc_mvp.adapter
 
 
+import android.graphics.drawable.PictureDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.RequestBuilder
 import sergeevvs.fc_mvp.R
 import sergeevvs.fc_mvp.data.ID
 import sergeevvs.fc_mvp.data.Team
@@ -36,7 +38,11 @@ class TeamsListAdapter(private val presenter: TeamsListPresenter) :
     class TeamCardHolder(private val binding: TeamCardBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bindTeam(team: Team, navController: NavController?) {
+        fun bindTeam(
+            team: Team,
+            navController: NavController?,
+            requestBuilder: RequestBuilder<PictureDrawable>
+        ) {
             binding.team = team
             binding.root.setOnClickListener {
                 val bundle = Bundle()
@@ -47,6 +53,7 @@ class TeamsListAdapter(private val presenter: TeamsListPresenter) :
                 )
             }
             binding.executePendingBindings()
+            requestBuilder.load(team.crestUrl).into(binding.cardImage)
         }
     }
 }

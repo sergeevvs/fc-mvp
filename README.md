@@ -1,4 +1,4 @@
 # fc-mvp
 TODO:
-    - Glide обработка svg
+    - Glide сделан!!! https://bumptech.github.io/glide/doc/generatedapi.html   ---   РУЛИТ!!!
     - Room
