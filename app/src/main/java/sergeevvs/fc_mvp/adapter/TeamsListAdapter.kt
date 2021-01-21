@@ -47,10 +47,6 @@ class TeamsListAdapter(private val presenter: TeamsListPresenter) :
                 )
             }
             binding.executePendingBindings()
-
-            /*Glide.with(binding.root)
-                    .load(team.crestUrl)
-                    .into(binding.cardImage)*/
         }
     }
 }
