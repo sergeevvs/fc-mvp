@@ -2,8 +2,6 @@ package sergeevvs.fc_mvp.teamslist
 
 import android.graphics.drawable.PictureDrawable
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
-import com.bumptech.glide.RequestBuilder
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -15,12 +13,16 @@ import sergeevvs.fc_mvp.repository.MainRepository
 import sergeevvs.fc_mvp.svg.GlideApp
 import sergeevvs.fc_mvp.svg.SvgSoftwareLayerSetter
 
-class TeamsListPresenterImpl(private val model: MainRepository) :
+class TeamsListPresenterImpl(private val repository: MainRepository) :
     BasePresenter<TeamsListFragment>(), TeamsListPresenter {
 
     private var teams = getMockTeamsList()
-    private lateinit var navController: NavController
-    private lateinit var requestBuilder: RequestBuilder<PictureDrawable>
+    private val navController by lazy { view?.getNavController() }
+    private val requestBuilder by lazy {
+        GlideApp.with(view as Fragment)
+                .`as`(PictureDrawable::class.java)
+                .listener(SvgSoftwareLayerSetter)
+    }
 
     override fun getTeamsList() = teams
 
@@ -29,15 +31,11 @@ class TeamsListPresenterImpl(private val model: MainRepository) :
     }
 
     override fun viewIsReady() {
-        requestBuilder = GlideApp.with(view as Fragment)
-                .`as`(PictureDrawable::class.java)
-                .listener(SvgSoftwareLayerSetter)
-        view?.getNavController()?.let { navController = it }
         if (teams.list.isEmpty()) loadTeams()
     }
 
     private fun loadTeams() {
-        model.getTeams().enqueue(object : Callback<TeamsList> {
+        repository.getTeams().enqueue(object : Callback<TeamsList> {
             override fun onResponse(call: Call<TeamsList>, response: Response<TeamsList>) {
                 response.body()?.let { teams = it }
                 view?.updateList()
