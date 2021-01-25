@@ -9,16 +9,19 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import dagger.hilt.android.AndroidEntryPoint
 import sergeevvs.fc_mvp.R
 import sergeevvs.fc_mvp.adapter.SquadAdapter
 import sergeevvs.fc_mvp.data.TEAM
 import sergeevvs.fc_mvp.data.Team
 import sergeevvs.fc_mvp.databinding.FragmentSquadBinding
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class SquadListFragmentImpl : Fragment(), SquadListFragment {
 
+    @Inject lateinit var presenter: SquadListPresenter
     private lateinit var binding: FragmentSquadBinding
-    private val presenter: SquadListPresenter = SquadListPresenterImpl()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

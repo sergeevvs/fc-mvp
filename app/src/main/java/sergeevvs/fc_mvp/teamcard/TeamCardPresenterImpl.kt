@@ -12,8 +12,11 @@ import sergeevvs.fc_mvp.main.BasePresenter
 import sergeevvs.fc_mvp.repository.MainRepository
 import sergeevvs.fc_mvp.svg.GlideApp
 import sergeevvs.fc_mvp.svg.SvgSoftwareLayerSetter
+import javax.inject.Inject
 
-class TeamCardPresenterImpl(private val repository: MainRepository) : BasePresenter<TeamCardFragment>(),
+class TeamCardPresenterImpl @Inject constructor(
+    private val repository: MainRepository
+) : BasePresenter<TeamCardFragment>(),
     TeamCardPresenter {
 
     private var team = getMockTeam()

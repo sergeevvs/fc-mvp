@@ -9,17 +9,20 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import dagger.hilt.android.AndroidEntryPoint
 import sergeevvs.fc_mvp.R
 import sergeevvs.fc_mvp.adapter.TeamsListAdapter
 import sergeevvs.fc_mvp.data.TEAMS_LIST
 import sergeevvs.fc_mvp.data.TeamsList
 import sergeevvs.fc_mvp.databinding.FragmentListBinding
-import sergeevvs.fc_mvp.repository.MainRepositoryImpl
+import sergeevvs.fc_mvp.repository.MainRepository
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class TeamsListFragmentImpl : Fragment(), TeamsListFragment {
 
+    @Inject lateinit var presenter: TeamsListPresenter
     private lateinit var binding: FragmentListBinding
-    private val presenter: TeamsListPresenter = TeamsListPresenterImpl(MainRepositoryImpl())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

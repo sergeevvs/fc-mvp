@@ -12,9 +12,11 @@ import sergeevvs.fc_mvp.main.BasePresenter
 import sergeevvs.fc_mvp.repository.MainRepository
 import sergeevvs.fc_mvp.svg.GlideApp
 import sergeevvs.fc_mvp.svg.SvgSoftwareLayerSetter
+import javax.inject.Inject
 
-class TeamsListPresenterImpl(private val repository: MainRepository) :
-    BasePresenter<TeamsListFragment>(), TeamsListPresenter {
+class TeamsListPresenterImpl @Inject constructor(
+    private val repository: MainRepository
+) : BasePresenter<TeamsListFragment>(), TeamsListPresenter {
 
     private var teams = getMockTeamsList()
     private val navController by lazy { view?.getNavController() }
