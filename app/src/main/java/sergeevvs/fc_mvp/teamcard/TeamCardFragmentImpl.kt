@@ -9,16 +9,18 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.RequestBuilder
+import dagger.hilt.android.AndroidEntryPoint
 import sergeevvs.fc_mvp.R
 import sergeevvs.fc_mvp.data.TEAM
 import sergeevvs.fc_mvp.data.Team
 import sergeevvs.fc_mvp.databinding.FragmentCardBinding
-import sergeevvs.fc_mvp.repository.MainRepositoryImpl
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class TeamCardFragmentImpl : Fragment(), TeamCardFragment {
 
+    @Inject lateinit var presenter: TeamCardPresenter
     private lateinit var binding: FragmentCardBinding
-    private val presenter: TeamCardPresenter = TeamCardPresenterImpl(MainRepositoryImpl())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

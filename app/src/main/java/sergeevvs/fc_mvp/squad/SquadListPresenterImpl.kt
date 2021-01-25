@@ -5,8 +5,10 @@ import sergeevvs.fc_mvp.data.TEAM
 import sergeevvs.fc_mvp.data.Team
 import sergeevvs.fc_mvp.data.getMockTeam
 import sergeevvs.fc_mvp.main.BasePresenter
+import javax.inject.Inject
 
-class SquadListPresenterImpl : BasePresenter<SquadListFragment>(), SquadListPresenter {
+class SquadListPresenterImpl @Inject constructor() : BasePresenter<SquadListFragment>(),
+    SquadListPresenter {
 
     private var team = getMockTeam()
 
